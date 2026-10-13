@@ -20,13 +20,28 @@ function toggleTheme() {
 </script>
 
 <template>
-  <div class="min-h-screen bg-zinc-50 text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100">
-    <div class="mx-auto max-w-5xl px-5 pb-16 pt-6 sm:px-8">
+  <div class="relative min-h-screen overflow-hidden bg-bg text-heading antialiased">
+    <!-- Ambient background glows -->
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0">
+      <div class="glow absolute -top-40 left-1/2 size-[36rem] -translate-x-1/2 rounded-full bg-accent blur-[120px]" />
+      <div class="glow absolute -bottom-24 -right-24 size-[28rem] rounded-full bg-break blur-[120px]" />
+      <div class="glow absolute -left-40 top-1/3 size-[26rem] rounded-full bg-haze blur-[120px]" />
+    </div>
+
+    <div class="relative mx-auto max-w-5xl px-5 pb-16 pt-6 sm:px-8">
       <header class="mb-8 flex items-center justify-between">
-        <h1 class="text-lg font-semibold tracking-tight">Todooren</h1>
+        <div class="flex items-center gap-3">
+          <div class="grid size-10 place-items-center rounded-2xl bg-linear-to-br from-accent-hi to-accent text-on-accent shadow-lg shadow-accent/30">
+            <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3 2" />
+            </svg>
+          </div>
+          <h1 class="text-xl font-semibold tracking-tight">Todooren</h1>
+        </div>
         <button
           type="button"
-          class="grid size-9 place-items-center rounded-full text-zinc-500 hover:bg-zinc-200/70 hover:text-zinc-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+          class="grid size-9 place-items-center rounded-full text-body hover:bg-subtle hover:text-heading focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
           @click="toggleTheme"
         >

@@ -45,18 +45,18 @@ function toToday(id: string) {
 </script>
 
 <template>
-  <section aria-label="Todos">
+  <section class="glass rounded-3xl p-5 sm:p-6" aria-label="Todos">
     <form class="flex gap-2" @submit.prevent="addTodo">
       <input
         v-model="draft"
         type="text"
         placeholder="Add a task…"
         aria-label="New task"
-        class="min-w-0 flex-1 rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-zinc-400 focus:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:placeholder:text-zinc-500 dark:focus:border-zinc-600"
+        class="min-w-0 flex-1 rounded-2xl border border-line bg-surface px-4 py-3 text-sm outline-none placeholder:text-faint focus:border-accent-line focus:ring-2 focus:ring-accent/20"
       />
       <button
         type="submit"
-        class="rounded-2xl bg-zinc-900 px-5 text-sm font-semibold text-white hover:bg-zinc-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 disabled:opacity-40 disabled:hover:bg-zinc-900 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white dark:disabled:hover:bg-zinc-100"
+        class="rounded-2xl bg-linear-to-br from-accent-hi to-accent shadow-lg shadow-accent/30 transition active:scale-95 px-5 text-sm font-semibold text-on-accent hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:opacity-40 disabled:shadow-none"
         :disabled="!draft.trim()"
       >
         Add
@@ -66,12 +66,12 @@ function toToday(id: string) {
     <div class="mb-3 mt-8 flex items-baseline justify-between px-1">
       <h2 class="text-sm font-semibold">
         Today
-        <span class="ml-1.5 font-normal tabular-nums text-zinc-400 dark:text-zinc-500">{{ remaining }} left</span>
+        <span class="ml-1.5 font-normal tabular-nums text-faint">{{ remaining }} left</span>
       </h2>
       <button
         v-if="hasCompleted"
         type="button"
-        class="rounded text-xs text-zinc-500 hover:text-zinc-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:text-zinc-400 dark:hover:text-zinc-100"
+        class="rounded text-xs text-body hover:text-heading focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         @click="clearCompleted"
       >
         Clear completed
@@ -86,13 +86,13 @@ function toToday(id: string) {
 
     <button
       type="button"
-      class="mb-3 mt-10 flex items-center gap-1.5 rounded px-1 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
+      class="mb-3 mt-10 flex items-center gap-1.5 rounded px-1 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
       :aria-expanded="backlogOpen"
       @click="backlogOpen = !backlogOpen"
     >
       <svg
         viewBox="0 0 16 16"
-        class="size-3.5 text-zinc-400 transition-transform duration-200"
+        class="size-3.5 text-faint transition-transform duration-200"
         :class="backlogOpen && 'rotate-90'"
         fill="none"
         stroke="currentColor"
@@ -104,7 +104,7 @@ function toToday(id: string) {
         <path d="m6 3.5 4.5 4.5L6 12.5" />
       </svg>
       Backlog
-      <span class="font-normal tabular-nums text-zinc-400 dark:text-zinc-500">{{ backlog.length }}</span>
+      <span class="font-normal tabular-nums text-faint">{{ backlog.length }}</span>
     </button>
     <TodoList
       v-show="backlogOpen"

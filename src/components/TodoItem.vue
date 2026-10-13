@@ -38,16 +38,16 @@ function cancel() {
 }
 
 const iconButton =
-  'grid size-8 shrink-0 place-items-center rounded-lg text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900 focus-visible:outline-2 focus-visible:outline-zinc-400 dark:text-zinc-500 dark:hover:bg-zinc-800 dark:hover:text-zinc-100'
+  'grid size-8 shrink-0 place-items-center rounded-lg text-faint hover:bg-subtle hover:text-heading focus-visible:outline-2 focus-visible:outline-accent'
 </script>
 
 <template>
   <li
-    class="flex items-center gap-1 rounded-2xl border border-zinc-200 bg-white py-1.5 pl-1 pr-2 dark:border-zinc-800 dark:bg-zinc-900"
+    class="flex items-center gap-1 rounded-2xl border border-line bg-surface py-1.5 pl-1 pr-2"
   >
     <button
       type="button"
-      class="drag-handle grid h-8 w-6 shrink-0 cursor-grab touch-none place-items-center rounded-lg text-zinc-300 hover:text-zinc-500 focus-visible:outline-2 focus-visible:outline-zinc-400 active:cursor-grabbing dark:text-zinc-600 dark:hover:text-zinc-400"
+      class="drag-handle grid h-8 w-6 shrink-0 cursor-grab touch-none place-items-center rounded-lg text-faint hover:text-body focus-visible:outline-2 focus-visible:outline-accent active:cursor-grabbing"
       aria-label="Reorder: drag, or press the up and down arrow keys"
       @keydown.up.prevent="emit('nudge', -1)"
       @keydown.down.prevent="emit('nudge', 1)"
@@ -67,11 +67,11 @@ const iconButton =
       role="checkbox"
       :aria-checked="todo.done"
       :aria-label="`Mark “${todo.text}” as ${todo.done ? 'not done' : 'done'}`"
-      class="mx-1 grid size-5 shrink-0 place-items-center rounded-full border transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
+      class="mx-1 grid size-5 shrink-0 place-items-center rounded-full border transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
       :class="
         todo.done
-          ? 'border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900'
-          : 'border-zinc-300 text-transparent hover:border-zinc-500 dark:border-zinc-600 dark:hover:border-zinc-400'
+          ? 'border-accent bg-linear-to-br from-accent-hi to-accent text-on-accent shadow-md shadow-accent/30'
+          : 'border-faint text-transparent hover:border-accent'
       "
       @click="emit('update', { done: !todo.done })"
     >
@@ -86,7 +86,7 @@ const iconButton =
       v-model="draft"
       type="text"
       aria-label="Edit task"
-      class="min-w-0 flex-1 rounded-lg bg-zinc-100 px-2 py-1.5 text-sm outline-none dark:bg-zinc-800"
+      class="min-w-0 flex-1 rounded-lg bg-subtle px-2 py-1.5 text-sm outline-none"
       @keydown.enter="commit"
       @keydown.esc="cancel"
       @blur="commit"
@@ -94,10 +94,10 @@ const iconButton =
     <button
       v-else
       type="button"
-      class="min-w-0 flex-1 cursor-text rounded-lg px-2 py-1.5 text-left text-sm wrap-anywhere transition-colors focus-visible:outline-2 focus-visible:outline-zinc-400"
+      class="min-w-0 flex-1 cursor-text rounded-lg px-2 py-1.5 text-left text-sm wrap-anywhere transition-colors focus-visible:outline-2 focus-visible:outline-accent"
       :class="[
-        todo.done && 'text-zinc-400 line-through dark:text-zinc-500',
-        !todo.done && backlog && 'text-zinc-500 dark:text-zinc-400',
+        todo.done && 'text-faint line-through',
+        !todo.done && backlog && 'text-body',
       ]"
       title="Click to edit"
       @click="startEdit"

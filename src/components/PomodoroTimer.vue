@@ -149,19 +149,19 @@ onBeforeUnmount(() => {
 
 <template>
   <section
-    class="rounded-3xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900"
+    class="glass rounded-3xl p-6"
     aria-label="Pomodoro timer"
   >
-    <div class="mx-auto flex w-fit rounded-full bg-zinc-100 p-1 text-sm dark:bg-zinc-800">
+    <div class="mx-auto flex w-fit rounded-full border border-line p-1 text-sm">
       <button
         v-for="m in MODES"
         :key="m"
         type="button"
-        class="rounded-full px-4 py-1.5 font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
+        class="rounded-full px-4 py-1.5 font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         :class="
           mode === m
-            ? 'bg-white text-zinc-900 shadow-sm dark:bg-zinc-600 dark:text-white'
-            : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100'
+            ? 'bg-accent-soft text-accent'
+            : 'text-body hover:text-heading'
         "
         :aria-pressed="mode === m"
         @click="switchMode(m)"
@@ -178,7 +178,7 @@ onBeforeUnmount(() => {
           :r="RADIUS"
           fill="none"
           stroke-width="6"
-          class="stroke-zinc-100 dark:stroke-zinc-800"
+          class="stroke-line"
         />
         <circle
           cx="130"
@@ -187,8 +187,8 @@ onBeforeUnmount(() => {
           fill="none"
           stroke-width="6"
           stroke-linecap="round"
-          class="transition-[stroke-dashoffset] duration-200 ease-linear"
-          :class="mode === 'work' ? 'stroke-rose-500' : 'stroke-teal-500'"
+          class="ring-glow transition-[stroke-dashoffset] duration-200 ease-linear"
+          :class="mode === 'work' ? 'stroke-accent text-accent' : 'stroke-break text-break'"
           :stroke-dasharray="CIRCUMFERENCE"
           :stroke-dashoffset="dashOffset"
         />
@@ -197,7 +197,7 @@ onBeforeUnmount(() => {
         <div class="text-6xl font-light tabular-nums tracking-tight" role="timer" :aria-label="`${display} remaining`">
           {{ display }}
         </div>
-        <div class="mt-2 text-xs font-medium uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
+        <div class="mt-2 text-xs font-medium uppercase tracking-widest text-faint">
           {{ LABELS[mode] }}
         </div>
       </div>
@@ -206,7 +206,7 @@ onBeforeUnmount(() => {
     <div class="mt-6 flex items-center justify-center gap-3">
       <button
         type="button"
-        class="grid size-10 place-items-center rounded-full text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+        class="grid size-10 place-items-center rounded-full text-body hover:bg-subtle hover:text-heading focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         aria-label="Reset timer"
         @click="reset"
       >
@@ -218,7 +218,7 @@ onBeforeUnmount(() => {
 
       <button
         type="button"
-        class="h-11 min-w-32 rounded-full bg-zinc-900 px-6 text-sm font-semibold text-white hover:bg-zinc-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
+        class="h-11 min-w-32 rounded-full bg-linear-to-br from-accent-hi to-accent shadow-lg shadow-accent/30 transition active:scale-95 px-6 text-sm font-semibold text-on-accent hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         @click="running ? pause() : start()"
       >
         {{ running ? 'Pause' : inProgress ? 'Resume' : 'Start' }}
@@ -226,8 +226,8 @@ onBeforeUnmount(() => {
 
       <button
         type="button"
-        class="grid size-10 place-items-center rounded-full text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
-        :class="showSettings && 'bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100'"
+        class="grid size-10 place-items-center rounded-full text-body hover:bg-subtle hover:text-heading focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        :class="showSettings && 'bg-subtle text-heading'"
         aria-label="Timer settings"
         :aria-expanded="showSettings"
         @click="showSettings = !showSettings"
@@ -246,8 +246,8 @@ onBeforeUnmount(() => {
       :inert="!showSettings"
     >
       <div class="overflow-hidden">
-        <div class="mt-6 grid grid-cols-2 gap-3 border-t border-zinc-100 pt-5 dark:border-zinc-800">
-          <label v-for="m in MODES" :key="m" class="block text-xs font-medium text-zinc-500 dark:text-zinc-400">
+        <div class="mt-6 grid grid-cols-2 gap-3 border-t border-line pt-5">
+          <label v-for="m in MODES" :key="m" class="block text-xs font-medium text-body">
             {{ LABELS[m] }} (minutes)
             <input
               type="number"
@@ -255,7 +255,7 @@ onBeforeUnmount(() => {
               :min="MIN_MINUTES"
               :max="MAX_MINUTES"
               :value="minutesFor(m)"
-              class="mt-1.5 w-full rounded-xl border border-zinc-200 bg-transparent px-3 py-2 text-sm tabular-nums text-zinc-900 outline-none focus:border-zinc-400 dark:border-zinc-700 dark:text-zinc-100 dark:focus:border-zinc-500"
+              class="mt-1.5 w-full rounded-xl border border-line bg-transparent px-3 py-2 text-sm tabular-nums text-heading outline-none focus:border-accent-line focus:ring-2 focus:ring-accent/20"
               @change="setMinutes(m, $event)"
             />
           </label>

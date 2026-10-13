@@ -76,7 +76,7 @@ function onDragEnd() {
     </VueDraggable>
     <p
       v-if="!items.length"
-      class="pointer-events-none absolute inset-0 grid place-items-center rounded-2xl border border-dashed border-zinc-200 text-sm text-zinc-400 dark:border-zinc-800 dark:text-zinc-500"
+      class="pointer-events-none absolute inset-0 grid place-items-center rounded-2xl border border-dashed border-line text-sm text-faint"
     >
       {{ emptyText }}
     </p>
