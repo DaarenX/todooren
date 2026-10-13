@@ -42,9 +42,7 @@ const iconButton =
 </script>
 
 <template>
-  <li
-    class="flex items-center gap-1 rounded-2xl border border-line bg-surface py-1.5 pl-1 pr-2"
-  >
+  <li class="flex items-center gap-1 rounded-2xl border border-line bg-surface py-1.5 pl-1 pr-2">
     <button
       type="button"
       class="drag-handle grid h-8 w-6 shrink-0 cursor-grab touch-none place-items-center rounded-lg text-faint hover:text-body focus-visible:outline-2 focus-visible:outline-accent active:cursor-grabbing"
@@ -75,7 +73,16 @@ const iconButton =
       "
       @click="emit('update', { done: !todo.done })"
     >
-      <svg viewBox="0 0 16 16" class="size-3" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <svg
+        viewBox="0 0 16 16"
+        class="size-3"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.25"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
         <path d="m3.5 8.5 3 3 6-7" />
       </svg>
     </button>
@@ -95,10 +102,7 @@ const iconButton =
       v-else
       type="button"
       class="min-w-0 flex-1 cursor-text rounded-lg px-2 py-1.5 text-left text-sm wrap-anywhere transition-colors focus-visible:outline-2 focus-visible:outline-accent"
-      :class="[
-        todo.done && 'text-faint line-through',
-        !todo.done && backlog && 'text-body',
-      ]"
+      :class="[todo.done && 'text-faint line-through', !todo.done && backlog && 'text-body']"
       title="Click to edit"
       @click="startEdit"
     >
@@ -112,7 +116,16 @@ const iconButton =
       :title="backlog ? 'Move to today' : 'Move to backlog'"
       @click="emit('transfer')"
     >
-      <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <svg
+        viewBox="0 0 24 24"
+        class="size-4"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.75"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
         <path v-if="backlog" d="M12 19V5M6 11l6-6 6 6" />
         <template v-else>
           <path d="M4 7h16v3H4zM6 10v9h12v-9" />
@@ -121,8 +134,22 @@ const iconButton =
       </svg>
     </button>
 
-    <button type="button" :class="[iconButton, 'hover:text-rose-600 dark:hover:text-rose-400']" aria-label="Delete task" title="Delete" @click="emit('remove')">
-      <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
+    <button
+      type="button"
+      :class="[iconButton, 'hover:text-rose-600 dark:hover:text-rose-400']"
+      aria-label="Delete task"
+      title="Delete"
+      @click="emit('remove')"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        class="size-4"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.75"
+        stroke-linecap="round"
+        aria-hidden="true"
+      >
         <path d="M6 6l12 12M18 6 6 18" />
       </svg>
     </button>

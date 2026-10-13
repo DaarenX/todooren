@@ -148,21 +148,14 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section
-    class="glass rounded-3xl p-6"
-    aria-label="Pomodoro timer"
-  >
+  <section class="glass rounded-3xl p-6" aria-label="Pomodoro timer">
     <div class="mx-auto flex w-fit rounded-full border border-line p-1 text-sm">
       <button
         v-for="m in MODES"
         :key="m"
         type="button"
         class="rounded-full px-4 py-1.5 font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        :class="
-          mode === m
-            ? 'bg-accent-soft text-accent'
-            : 'text-body hover:text-heading'
-        "
+        :class="mode === m ? 'bg-accent-soft text-accent' : 'text-body hover:text-heading'"
         :aria-pressed="mode === m"
         @click="switchMode(m)"
       >
@@ -172,14 +165,7 @@ onBeforeUnmount(() => {
 
     <div class="relative mx-auto mt-6 aspect-square w-full max-w-64">
       <svg viewBox="0 0 260 260" class="size-full -rotate-90" aria-hidden="true">
-        <circle
-          cx="130"
-          cy="130"
-          :r="RADIUS"
-          fill="none"
-          stroke-width="6"
-          class="stroke-line"
-        />
+        <circle cx="130" cy="130" :r="RADIUS" fill="none" stroke-width="6" class="stroke-line" />
         <circle
           cx="130"
           cy="130"
@@ -194,7 +180,11 @@ onBeforeUnmount(() => {
         />
       </svg>
       <div class="absolute inset-0 flex flex-col items-center justify-center">
-        <div class="text-6xl font-light tabular-nums tracking-tight" role="timer" :aria-label="`${display} remaining`">
+        <div
+          class="text-6xl font-light tabular-nums tracking-tight"
+          role="timer"
+          :aria-label="`${display} remaining`"
+        >
           {{ display }}
         </div>
         <div class="mt-2 text-xs font-medium uppercase tracking-widest text-faint">
@@ -210,7 +200,15 @@ onBeforeUnmount(() => {
         aria-label="Reset timer"
         @click="reset"
       >
-        <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          viewBox="0 0 24 24"
+          class="size-5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <path d="M3 12a9 9 0 1 0 3-6.7" />
           <path d="M3 4v5h5" />
         </svg>
@@ -232,7 +230,14 @@ onBeforeUnmount(() => {
         :aria-expanded="showSettings"
         @click="showSettings = !showSettings"
       >
-        <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+        <svg
+          viewBox="0 0 24 24"
+          class="size-5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+        >
           <path d="M4 7h9M17 7h3M4 17h3M11 17h9" />
           <circle cx="15" cy="7" r="2" />
           <circle cx="9" cy="17" r="2" />

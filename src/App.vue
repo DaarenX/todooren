@@ -23,16 +23,31 @@ function toggleTheme() {
   <div class="relative min-h-screen overflow-hidden bg-bg text-heading antialiased">
     <!-- Ambient background glows -->
     <div aria-hidden="true" class="pointer-events-none fixed inset-0">
-      <div class="glow absolute -top-40 left-1/2 size-[36rem] -translate-x-1/2 rounded-full bg-accent blur-[120px]" />
-      <div class="glow absolute -bottom-24 -right-24 size-[28rem] rounded-full bg-break blur-[120px]" />
+      <div
+        class="glow absolute -top-40 left-1/2 size-[36rem] -translate-x-1/2 rounded-full bg-accent blur-[120px]"
+      />
+      <div
+        class="glow absolute -bottom-24 -right-24 size-[28rem] rounded-full bg-break blur-[120px]"
+      />
       <div class="glow absolute -left-40 top-1/3 size-[26rem] rounded-full bg-haze blur-[120px]" />
     </div>
 
     <div class="relative mx-auto max-w-5xl px-5 pb-16 pt-6 sm:px-8">
       <header class="mb-8 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <div class="grid size-10 place-items-center rounded-2xl bg-linear-to-br from-accent-hi to-accent text-on-accent shadow-lg shadow-accent/30">
-            <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <div
+            class="grid size-10 place-items-center rounded-2xl bg-linear-to-br from-accent-hi to-accent text-on-accent shadow-lg shadow-accent/30"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              class="size-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
               <circle cx="12" cy="12" r="9" />
               <path d="M12 7v5l3 2" />
             </svg>
@@ -45,11 +60,30 @@ function toggleTheme() {
           :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
           @click="toggleTheme"
         >
-          <svg v-if="isDark" viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+          <svg
+            v-if="isDark"
+            viewBox="0 0 24 24"
+            class="size-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+          >
             <circle cx="12" cy="12" r="4" />
-            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            />
           </svg>
-          <svg v-else viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            v-else
+            viewBox="0 0 24 24"
+            class="size-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
             <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z" />
           </svg>
         </button>
