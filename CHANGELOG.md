@@ -12,6 +12,8 @@ this project adheres to [Semantic Versioning](https://semver.org).
 - ESLint, Prettier, Vitest, Husky + lint-staged, and commitlint, so linting,
   formatting, tests, and commit-message checks run locally (see ADR 0002).
 - Unit tests for the `useLocalStorage` composable.
+- Component tests for `App`, `TodoBoard`, `TodoList`, and `TodoItem`, bringing coverage
+  above the 80% threshold so `npm run test:coverage` passes.
 - Architecture Decision Records in `docs/adr/` (0001 stack, 0002 tooling).
 - `scripts/security-check.sh` for staged-secret scanning and `npm audit`.
 - `.env.example` and `.gitignore` entries for env files, secrets, and agent directories.
