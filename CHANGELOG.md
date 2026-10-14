@@ -18,6 +18,9 @@ this project adheres to [Semantic Versioning](https://semver.org).
 
 ### Changed
 
+- `format` and `format:check` now cover the whole repo instead of only `src/`, matching
+  what lint-staged formats; `index.html` and `vite.config.ts` reformatted.
+
 ### Fixed
 
 ### Removed
