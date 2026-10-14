@@ -39,4 +39,6 @@ this project adheres to [Semantic Versioning](https://semver.org).
 
 ### Removed
 
+- Unused `e2e/**` test exclude left over from the Vite template (there are no e2e tests).
+
 ### Security
