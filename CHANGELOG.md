@@ -32,6 +32,8 @@ this project adheres to [Semantic Versioning](https://semver.org).
   Google Fonts, so the app makes no network requests (ADR 0001 updated).
 - New todos get IDs from `crypto.randomUUID()` instead of a timestamp plus
   `Math.random()`, removing the small chance of collisions. Existing IDs are unchanged.
+- `tailwindcss`, `@tailwindcss/vite`, and `@fontsource-variable/inter` moved to
+  `devDependencies`, since they are only used at build time.
 
 ### Fixed
 
