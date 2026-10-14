@@ -20,8 +20,7 @@ const hasCompleted = computed(() => todos.value.some((t) => t.done))
 function addTodo() {
   const text = draft.value.trim()
   if (!text) return
-  const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 8)
-  todos.value.push({ id, text, done: false })
+  todos.value.push({ id: crypto.randomUUID(), text, done: false })
   draft.value = ''
 }
 

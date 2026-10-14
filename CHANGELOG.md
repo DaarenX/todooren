@@ -30,6 +30,8 @@ this project adheres to [Semantic Versioning](https://semver.org).
   `icon-btn`, and `field-focus` utilities in `main.css`; no visual change.
 - The Inter font is now bundled via `@fontsource-variable/inter` instead of loaded from
   Google Fonts, so the app makes no network requests (ADR 0001 updated).
+- New todos get IDs from `crypto.randomUUID()` instead of a timestamp plus
+  `Math.random()`, removing the small chance of collisions. Existing IDs are unchanged.
 
 ### Fixed
 

@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { flushPromises, mount, type VueWrapper } from '@vue/test-utils'
 import TodoBoard from './TodoBoard.vue'
 import TodoList from './TodoList.vue'
@@ -30,6 +30,7 @@ beforeEach(() => {
 
 afterEach(() => {
   wrapper.unmount()
+  vi.restoreAllMocks()
 })
 
 describe('TodoBoard', () => {
@@ -40,6 +41,15 @@ describe('TodoBoard', () => {
     expect(lists()[0]).toEqual(['Write report'])
     expect(stored('todos')).toMatchObject([{ text: 'Write report', done: false }])
     expect((wrapper.get('input').element as HTMLInputElement).value).toBe('')
+  })
+
+  it('gives each new task a random UUID', async () => {
+    const uuid = '123e4567-e89b-42d3-a456-426614174000'
+    vi.spyOn(crypto, 'randomUUID').mockReturnValue(uuid)
+    wrapper = mount(TodoBoard)
+    await add('Task')
+    await flushPromises()
+    expect(stored('todos')[0].id).toBe(uuid)
   })
 
   it('ignores blank tasks and disables Add for them', async () => {
