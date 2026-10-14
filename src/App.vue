@@ -35,9 +35,7 @@ function toggleTheme() {
     <div class="relative mx-auto max-w-5xl px-5 pb-16 pt-6 sm:px-8">
       <header class="mb-8 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <div
-            class="grid size-10 place-items-center rounded-2xl bg-linear-to-br from-accent-hi to-accent text-on-accent shadow-lg shadow-accent/30"
-          >
+          <div class="grid size-10 place-items-center rounded-2xl accent-fill">
             <svg
               viewBox="0 0 24 24"
               class="size-5"
@@ -56,7 +54,7 @@ function toggleTheme() {
         </div>
         <button
           type="button"
-          class="grid size-9 place-items-center rounded-full text-body hover:bg-subtle hover:text-heading focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          class="icon-btn size-9"
           :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
           @click="toggleTheme"
         >

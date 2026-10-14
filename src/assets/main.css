@@ -64,6 +64,27 @@
   --color-haze: var(--haze);
 }
 
+/* Shared class lists, so components don't repeat them. */
+@utility focus-ring {
+  @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+}
+
+@utility accent-fill {
+  @apply bg-linear-to-br from-accent-hi to-accent text-on-accent shadow-lg shadow-accent/30;
+}
+
+@utility btn-primary {
+  @apply accent-fill focus-ring text-sm font-semibold transition hover:brightness-110 active:scale-95;
+}
+
+@utility icon-btn {
+  @apply focus-ring grid place-items-center rounded-full text-body hover:bg-subtle hover:text-heading;
+}
+
+@utility field-focus {
+  @apply focus:border-accent-line focus:ring-2 focus:ring-accent/20;
+}
+
 /* Frosted glass panel with a glossy highlight along the top-left edge. */
 .glass {
   border: 1px solid var(--line);

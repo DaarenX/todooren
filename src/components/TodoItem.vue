@@ -65,7 +65,7 @@ const iconButton =
       role="checkbox"
       :aria-checked="todo.done"
       :aria-label="`Mark “${todo.text}” as ${todo.done ? 'not done' : 'done'}`"
-      class="mx-1 grid size-5 shrink-0 place-items-center rounded-full border transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      class="mx-1 grid size-5 shrink-0 place-items-center rounded-full border transition-colors focus-ring"
       :class="
         todo.done
           ? 'border-accent bg-linear-to-br from-accent-hi to-accent text-on-accent shadow-md shadow-accent/30'

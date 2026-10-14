@@ -26,6 +26,8 @@ this project adheres to [Semantic Versioning](https://semver.org).
   Vite template boilerplate.
 - Split `PomodoroTimer.vue` (over the 200-line limit) into `usePomodoro`, `useChime`, and
   `useTimerSettings` composables, with unit tests for each and for the component.
+- Repeated Tailwind class lists replaced by `focus-ring`, `accent-fill`, `btn-primary`,
+  `icon-btn`, and `field-focus` utilities in `main.css`; no visual change.
 
 ### Fixed
 

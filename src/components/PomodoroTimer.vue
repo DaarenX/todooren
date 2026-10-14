@@ -46,7 +46,7 @@ onBeforeUnmount(() => {
         v-for="m in MODES"
         :key="m"
         type="button"
-        class="rounded-full px-4 py-1.5 font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        class="rounded-full px-4 py-1.5 font-medium transition-colors focus-ring"
         :class="mode === m ? 'bg-accent-soft text-accent' : 'text-body hover:text-heading'"
         :aria-pressed="mode === m"
         @click="switchMode(m)"
@@ -86,12 +86,7 @@ onBeforeUnmount(() => {
     </div>
 
     <div class="mt-6 flex items-center justify-center gap-3">
-      <button
-        type="button"
-        class="grid size-10 place-items-center rounded-full text-body hover:bg-subtle hover:text-heading focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        aria-label="Reset timer"
-        @click="reset"
-      >
+      <button type="button" class="icon-btn size-10" aria-label="Reset timer" @click="reset">
         <svg
           viewBox="0 0 24 24"
           class="size-5"
@@ -108,7 +103,7 @@ onBeforeUnmount(() => {
 
       <button
         type="button"
-        class="h-11 min-w-32 rounded-full bg-linear-to-br from-accent-hi to-accent shadow-lg shadow-accent/30 transition active:scale-95 px-6 text-sm font-semibold text-on-accent hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        class="h-11 min-w-32 rounded-full btn-primary px-6"
         @click="running ? pause() : start()"
       >
         {{ running ? 'Pause' : inProgress ? 'Resume' : 'Start' }}
@@ -116,7 +111,7 @@ onBeforeUnmount(() => {
 
       <button
         type="button"
-        class="grid size-10 place-items-center rounded-full text-body hover:bg-subtle hover:text-heading focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        class="icon-btn size-10"
         :class="showSettings && 'bg-subtle text-heading'"
         aria-label="Timer settings"
         :aria-expanded="showSettings"
@@ -152,7 +147,7 @@ onBeforeUnmount(() => {
               :min="MIN_MINUTES"
               :max="MAX_MINUTES"
               :value="minutesFor(m)"
-              class="mt-1.5 w-full rounded-xl border border-line bg-transparent px-3 py-2 text-sm tabular-nums text-heading outline-none focus:border-accent-line focus:ring-2 focus:ring-accent/20"
+              class="mt-1.5 w-full rounded-xl border border-line bg-transparent px-3 py-2 text-sm tabular-nums text-heading outline-none field-focus"
               @change="onMinutesChange(m, $event)"
             />
           </label>

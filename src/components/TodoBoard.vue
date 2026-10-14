@@ -52,11 +52,11 @@ function toToday(id: string) {
         type="text"
         placeholder="Add a task…"
         aria-label="New task"
-        class="min-w-0 flex-1 rounded-2xl border border-line bg-surface px-4 py-3 text-sm outline-none placeholder:text-faint focus:border-accent-line focus:ring-2 focus:ring-accent/20"
+        class="min-w-0 flex-1 rounded-2xl border border-line bg-surface px-4 py-3 text-sm outline-none placeholder:text-faint field-focus"
       />
       <button
         type="submit"
-        class="rounded-2xl bg-linear-to-br from-accent-hi to-accent shadow-lg shadow-accent/30 transition active:scale-95 px-5 text-sm font-semibold text-on-accent hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:opacity-40 disabled:shadow-none"
+        class="rounded-2xl btn-primary px-5 disabled:opacity-40 disabled:shadow-none"
         :disabled="!draft.trim()"
       >
         Add
@@ -71,7 +71,7 @@ function toToday(id: string) {
       <button
         v-if="hasCompleted"
         type="button"
-        class="rounded text-xs text-body hover:text-heading focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        class="rounded text-xs text-body hover:text-heading focus-ring"
         @click="clearCompleted"
       >
         Clear completed
@@ -86,7 +86,7 @@ function toToday(id: string) {
 
     <button
       type="button"
-      class="mb-3 mt-10 flex items-center gap-1.5 rounded px-1 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      class="mb-3 mt-10 flex items-center gap-1.5 rounded px-1 text-sm font-semibold focus-ring"
       :aria-expanded="backlogOpen"
       @click="backlogOpen = !backlogOpen"
     >
