@@ -1,104 +1,32 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
-import { useLocalStorage } from '@/composables/useLocalStorage'
+import { computed, onBeforeUnmount, ref, watchEffect } from 'vue'
+import { useChime } from '@/composables/useChime'
+import { usePomodoro } from '@/composables/usePomodoro'
+import { MAX_MINUTES, MIN_MINUTES, useTimerSettings } from '@/composables/useTimerSettings'
+import type { TimerMode } from '@/types'
 
-type Mode = 'work' | 'break'
-
-const MIN_MINUTES = 1
-const MAX_MINUTES = 180
-const DEFAULTS: Record<Mode, number> = { work: 25, break: 5 }
-const LABELS: Record<Mode, string> = { work: 'Focus', break: 'Break' }
-const MODES: Mode[] = ['work', 'break']
-
-const settings = useLocalStorage<Record<Mode, number>>('todooren:timer', { ...DEFAULTS })
-
-function clampMinutes(value: unknown, fallback: number) {
-  const n = Math.round(Number(value))
-  if (!Number.isFinite(n)) return fallback
-  return Math.min(MAX_MINUTES, Math.max(MIN_MINUTES, n))
-}
-
-function minutesFor(m: Mode) {
-  return clampMinutes(settings.value?.[m], DEFAULTS[m])
-}
-
-function setMinutes(m: Mode, event: Event) {
-  const input = event.target as HTMLInputElement
-  const value = clampMinutes(input.value, minutesFor(m))
-  settings.value = { work: minutesFor('work'), break: minutesFor('break'), [m]: value }
-  input.value = String(value)
-}
-
-const mode = ref<Mode>('work')
-const running = ref(false)
-const showSettings = ref(false)
-const durationMs = computed(() => minutesFor(mode.value) * 60_000)
-const remainingMs = ref(durationMs.value)
-
-// The countdown is derived from a fixed end time so it stays accurate
-// even when the browser throttles timers in a background tab.
-let endAt = 0
-let interval: number | undefined
-
-function stopTicking() {
-  window.clearInterval(interval)
-  interval = undefined
-  running.value = false
-}
-
-function tick() {
-  remainingMs.value = Math.max(0, endAt - Date.now())
-  if (remainingMs.value === 0) complete()
-}
-
-function start() {
-  ensureAudio()
-  if (remainingMs.value <= 0) remainingMs.value = durationMs.value
-  endAt = Date.now() + remainingMs.value
-  running.value = true
-  interval = window.setInterval(tick, 200)
-}
-
-function pause() {
-  remainingMs.value = Math.max(0, endAt - Date.now())
-  stopTicking()
-}
-
-function reset() {
-  stopTicking()
-  remainingMs.value = durationMs.value
-}
-
-function switchMode(next: Mode) {
-  stopTicking()
-  mode.value = next
-  remainingMs.value = durationMs.value
-}
-
-function complete() {
-  playChime()
-  switchMode(mode.value === 'work' ? 'break' : 'work')
-}
-
-watch(durationMs, (ms) => {
-  if (!running.value) remainingMs.value = ms
-})
-
-const display = computed(() => {
-  const total = Math.ceil(remainingMs.value / 1000)
-  const m = Math.floor(total / 60)
-  const s = total % 60
-  return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
-})
-
+const LABELS: Record<TimerMode, string> = { work: 'Focus', break: 'Break' }
+const MODES: TimerMode[] = ['work', 'break']
 const RADIUS = 120
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS
-const dashOffset = computed(() => {
-  const fraction = Math.min(1, Math.max(0, remainingMs.value / durationMs.value))
-  return CIRCUMFERENCE * (1 - fraction)
-})
 
-const inProgress = computed(() => running.value || remainingMs.value !== durationMs.value)
+const { minutesFor, setMinutes } = useTimerSettings()
+const chime = useChime()
+const { mode, running, display, progress, inProgress, pause, reset, switchMode, ...timer } =
+  usePomodoro({ durationMs: (m) => minutesFor(m) * 60_000, onComplete: chime.play })
+
+const showSettings = ref(false)
+const dashOffset = computed(() => CIRCUMFERENCE * (1 - progress.value))
+
+function start() {
+  chime.prime()
+  timer.start()
+}
+
+function onMinutesChange(m: TimerMode, event: Event) {
+  const input = event.target as HTMLInputElement
+  input.value = String(setMinutes(m, input.value))
+}
 
 watchEffect(() => {
   document.title = inProgress.value
@@ -106,44 +34,8 @@ watchEffect(() => {
     : 'Todooren'
 })
 
-// --- Audio alert (synthesised, no asset needed) ---
-let audioCtx: AudioContext | undefined
-
-// Must be called from a user gesture so the browser lets us play later.
-function ensureAudio() {
-  try {
-    audioCtx ??= new AudioContext()
-    if (audioCtx.state === 'suspended') void audioCtx.resume()
-  } catch {
-    audioCtx = undefined
-  }
-}
-
-function playChime() {
-  const ctx = audioCtx
-  if (!ctx) return
-  const notes = [880, 1108.73, 1318.51]
-  for (let repeat = 0; repeat < 2; repeat++) {
-    notes.forEach((freq, i) => {
-      const t = ctx.currentTime + repeat * 1.1 + i * 0.2
-      const osc = ctx.createOscillator()
-      const gain = ctx.createGain()
-      osc.type = 'sine'
-      osc.frequency.value = freq
-      gain.gain.setValueAtTime(0.0001, t)
-      gain.gain.exponentialRampToValueAtTime(0.3, t + 0.02)
-      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.9)
-      osc.connect(gain).connect(ctx.destination)
-      osc.start(t)
-      osc.stop(t + 1)
-    })
-  }
-}
-
 onBeforeUnmount(() => {
-  stopTicking()
   document.title = 'Todooren'
-  void audioCtx?.close()
 })
 </script>
 
@@ -261,7 +153,7 @@ onBeforeUnmount(() => {
               :max="MAX_MINUTES"
               :value="minutesFor(m)"
               class="mt-1.5 w-full rounded-xl border border-line bg-transparent px-3 py-2 text-sm tabular-nums text-heading outline-none focus:border-accent-line focus:ring-2 focus:ring-accent/20"
-              @change="setMinutes(m, $event)"
+              @change="onMinutesChange(m, $event)"
             />
           </label>
         </div>

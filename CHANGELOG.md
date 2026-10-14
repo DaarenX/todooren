@@ -22,6 +22,8 @@ this project adheres to [Semantic Versioning](https://semver.org).
   what lint-staged formats; `index.html` and `vite.config.ts` reformatted.
 - `README.md` now describes todooren, its scripts, and contribution rules instead of the
   Vite template boilerplate.
+- Split `PomodoroTimer.vue` (over the 200-line limit) into `usePomodoro`, `useChime`, and
+  `useTimerSettings` composables, with unit tests for each and for the component.
 
 ### Fixed
 
