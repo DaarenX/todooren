@@ -47,7 +47,7 @@
 }
 
 @theme inline {
-  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --color-bg: var(--bg);
   --color-surface: var(--surface);
   --color-subtle: var(--subtle);

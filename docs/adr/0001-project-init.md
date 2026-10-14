@@ -27,6 +27,8 @@ minimalist with a smooth dark mode, providing:
 - **vue-draggable-plus** for drag-and-drop ordering on the board.
 - **No backend.** State is persisted as JSON in `localStorage` through the
   `useLocalStorage` composable.
+- **No runtime network requests.** Assets, including the Inter font
+  (`@fontsource-variable/inter`, added 2026-10-14), are bundled rather than loaded from a CDN.
 
 ## Consequences
 

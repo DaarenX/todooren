@@ -28,6 +28,8 @@ this project adheres to [Semantic Versioning](https://semver.org).
   `useTimerSettings` composables, with unit tests for each and for the component.
 - Repeated Tailwind class lists replaced by `focus-ring`, `accent-fill`, `btn-primary`,
   `icon-btn`, and `field-focus` utilities in `main.css`; no visual change.
+- The Inter font is now bundled via `@fontsource-variable/inter` instead of loaded from
+  Google Fonts, so the app makes no network requests (ADR 0001 updated).
 
 ### Fixed
 
