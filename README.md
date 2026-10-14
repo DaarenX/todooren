@@ -1,42 +1,50 @@
 # todooren
 
-This template should help get you started developing with Vue 3 in Vite.
+A single-page todo app with a built-in Pomodoro timer.
 
-## Recommended IDE Setup
+- **Todos:** add, complete, edit, and delete tasks; reorder them by dragging or with the
+  arrow keys on the drag handle.
+- **Backlog:** park tasks for later and move them back to today with one click or a drag.
+- **Pomodoro timer:** focus and break sessions (25 and 5 minutes by default, adjustable),
+  a countdown ring, and a chime when a session ends.
+- **Light and dark mode**, remembered per browser.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Everything is stored in the browser's `localStorage`. There is no backend and no account,
+so data stays on one browser profile and is lost if site data is cleared.
 
-## Recommended Browser Setup
+## Tech stack
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+Vue 3 (`<script setup>` SFCs), TypeScript, Vite, Tailwind CSS 4, and `vue-draggable-plus`.
+Tests use Vitest and Vue Test Utils. See [`docs/adr/`](docs/adr/) for the reasoning
+behind these choices.
 
-## Type Support for `.vue` Imports in TS
+## Getting started
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+Requires Node `^22.18.0` or `>=24.12.0`.
 
 ```sh
-npm install
+npm install   # also installs the Git hooks
+npm run dev   # start the dev server
 ```
 
-### Compile and Hot-Reload for Development
+## Scripts
 
-```sh
-npm run dev
-```
+| Command                           | What it does                                   |
+| --------------------------------- | ---------------------------------------------- |
+| `npm run dev`                     | Dev server with hot reload                     |
+| `npm run build`                   | Type-check and build for production (`dist/`)  |
+| `npm run preview`                 | Serve the production build locally             |
+| `npm run type-check`              | Run `vue-tsc`                                  |
+| `npm run lint` / `lint:fix`       | ESLint                                         |
+| `npm run format` / `format:check` | Prettier                                       |
+| `npm test` / `test:watch`         | Vitest                                         |
+| `npm run test:coverage`           | Vitest with coverage (80% thresholds)          |
+| `./scripts/security-check.sh`     | Scan staged files for secrets, run `npm audit` |
 
-### Type-Check, Compile and Minify for Production
+## Contributing
 
-```sh
-npm run build
-```
+- Commit messages follow [Conventional Commits](https://www.conventionalcommits.org)
+  (checked by commitlint).
+- The pre-commit hook runs ESLint and Prettier on staged files.
+- Every change that affects behaviour, config, docs, or dependencies gets an entry in
+  [`CHANGELOG.md`](CHANGELOG.md) in the same commit.

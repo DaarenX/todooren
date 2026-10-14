@@ -20,6 +20,8 @@ this project adheres to [Semantic Versioning](https://semver.org).
 
 - `format` and `format:check` now cover the whole repo instead of only `src/`, matching
   what lint-staged formats; `index.html` and `vite.config.ts` reformatted.
+- `README.md` now describes todooren, its scripts, and contribution rules instead of the
+  Vite template boilerplate.
 
 ### Fixed
 
