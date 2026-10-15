@@ -77,6 +77,26 @@ describe('TodoList', () => {
     expect(wrapper.emitted('transfer')).toEqual([['b']])
   })
 
+  it('pins a leaving item where it was instead of the top of the list', async () => {
+    vi.spyOn(HTMLElement.prototype, 'offsetTop', 'get').mockReturnValue(54)
+    wrapper = mount(TodoList, {
+      props: { modelValue: todos(), emptyText: 'Nothing here' },
+      global: { stubs: { 'transition-group': false } },
+    })
+    const leaving = wrapper.findAll('li')[1]!.element
+    await wrapper.setProps({ modelValue: todos().slice(0, 1) })
+    expect(leaving.style.top).toBe('54px')
+  })
+
+  it('removes an item dragged out at once, without a leave transition', async () => {
+    wrapper = mount(TodoList, {
+      props: { modelValue: todos(), emptyText: 'Nothing here', dragging: true },
+      global: { stubs: { 'transition-group': false } },
+    })
+    await wrapper.setProps({ modelValue: todos().slice(0, 1) })
+    expect(wrapper.findAll('li')).toHaveLength(1)
+  })
+
   it('reports dragging until shortly after the drop', () => {
     mountList()
     const draggable = wrapper.findComponent(VueDraggable)

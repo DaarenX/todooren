@@ -38,8 +38,19 @@ function nudge(index: number, delta: number) {
   items.value = next
 }
 
+// A leaving item goes `position: absolute` so its siblings can slide into place.
+// Without a `top`, a flex container drops it at the top of the list, so pin it
+// to the spot it is leaving from.
+function pinLeaving(el: Element) {
+  const item = el as HTMLElement
+  item.style.top = `${item.offsetTop}px`
+}
+
 // SortableJS animates the drag itself. Keep the TransitionGroup quiet until
 // the dropped order has rendered, otherwise the items would animate twice.
+// `css: false` matters on drop: vue-draggable-plus puts the dragged element back
+// into its source list for Vue to remove, and a CSS leave keeps it there for a
+// frame or two, flashing the item in the list it just left.
 function onDragEnd() {
   window.setTimeout(() => (dragging.value = false), 50)
 }
@@ -60,7 +71,9 @@ function onDragEnd() {
       <TransitionGroup
         tag="ul"
         :name="dragging ? 'none' : 'list'"
+        :css="!dragging"
         :class="[targetClass, 'relative flex min-h-12 flex-col gap-2']"
+        @before-leave="pinLeaving"
       >
         <TodoItem
           v-for="(todo, index) in items"

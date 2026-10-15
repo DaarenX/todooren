@@ -37,6 +37,11 @@ this project adheres to [Semantic Versioning](https://semver.org).
 
 ### Fixed
 
+- Moving a task between Today and the backlog no longer flashes it in the list it
+  left. Dropped items are removed from the source list at once instead of lingering
+  for a frame or two in a leave transition, and items moved with the button are pinned
+  to their own slot while they fade out, instead of dropping to the top of the list.
+
 ### Removed
 
 - Unused `e2e/**` test exclude left over from the Vite template (there are no e2e tests).
