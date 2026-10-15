@@ -12,6 +12,13 @@ A single-page todo app with a built-in Pomodoro timer.
 Everything is stored in the browser's `localStorage`. There is no backend and no account,
 so data stays on one browser profile and is lost if site data is cleared.
 
+## Deployment
+
+Pushes to `main` are linted, tested, built, and published to GitHub Pages by
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). Pull requests run the same
+checks without deploying. In the repository settings, set **Pages → Source** to
+**GitHub Actions** once.
+
 ## Tech stack
 
 Vue 3 (`<script setup>` SFCs), TypeScript, Vite, Tailwind CSS 4, and `vue-draggable-plus`.

@@ -31,7 +31,7 @@ There is no backend, no accounts, and no network calls.
 - Styling: Tailwind CSS 4 (via `@tailwindcss/vite`)
 - Drag and drop: `vue-draggable-plus`
 - Database: none (`localStorage` through `useLocalStorage`)
-- Deployment: none configured
+- Deployment: GitHub Pages via `.github/workflows/deploy.yml` on push to `main` (ADR 0003)
 - Testing: Vitest + Vue Test Utils (jsdom), coverage via v8
 
 ## Key Commands

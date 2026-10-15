@@ -8,6 +8,8 @@ this project adheres to [Semantic Versioning](https://semver.org).
 
 ### Added
 
+- GitHub Pages deployment: `deploy.yml` lints, tests, builds, and publishes `dist/` on
+  every push to `main`, and `pr-check.yml` runs the same checks on pull requests (see ADR 0003).
 - Claude Code setup: `CLAUDE.md` and project skills in `.claude/skills/`.
 - ESLint, Prettier, Vitest, Husky + lint-staged, and commitlint, so linting,
   formatting, tests, and commit-message checks run locally (see ADR 0002).
@@ -20,6 +22,7 @@ this project adheres to [Semantic Versioning](https://semver.org).
 
 ### Changed
 
+- Vite `base` set to `./` so the build loads its assets under the `/todooren/` Pages subpath.
 - `format` and `format:check` now cover the whole repo instead of only `src/`, matching
   what lint-staged formats; `index.html` and `vite.config.ts` reformatted.
 - `README.md` now describes todooren, its scripts, and contribution rules instead of the
