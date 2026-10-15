@@ -33,6 +33,13 @@ describe('TodoItem', () => {
     expect(wrapper.emitted('update')).toEqual([[{ done: false }]])
   })
 
+  it('fills a finished checkbox with the break green', () => {
+    mountItem({ done: true })
+    const classes = wrapper.get('[role="checkbox"]').classes()
+    expect(classes).toEqual(expect.arrayContaining(['border-break', 'bg-break']))
+    expect(classes.some((c) => c.includes('accent'))).toBe(false)
+  })
+
   it('opens a focused editor with the current text', async () => {
     mountItem()
     await wrapper.get('[title="Click to edit"]').trigger('click')

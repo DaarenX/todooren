@@ -45,6 +45,14 @@ describe('App', () => {
     expect(root.classList.contains('theme-transition')).toBe(false)
   })
 
+  // An implicit grid track grows to its content's min-content width, wider than a phone.
+  it('lets the layout column shrink to narrow screens', () => {
+    mountApp()
+    const main = wrapper.get('main').classes()
+    expect(main).toContain('grid-cols-1')
+    expect(main).toContain('lg:grid-cols-[22rem_minmax(0,1fr)]')
+  })
+
   it('still switches theme when storage is unavailable', async () => {
     vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
       throw new Error('blocked')

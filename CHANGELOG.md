@@ -22,6 +22,8 @@ this project adheres to [Semantic Versioning](https://semver.org).
 
 ### Changed
 
+- Finished todos now show their checkbox in the Pomodoro break green instead of the
+  rose accent, so completed work reads as "done" rather than "focus".
 - Vite `base` set to `./` so the build loads its assets under the `/todooren/` Pages subpath.
 - `format` and `format:check` now cover the whole repo instead of only `src/`, matching
   what lint-staged formats; `index.html` and `vite.config.ts` reformatted.
@@ -40,6 +42,9 @@ this project adheres to [Semantic Versioning](https://semver.org).
 
 ### Fixed
 
+- The todo board and timer no longer run past the right edge on phones. The page grid
+  had no explicit column below `lg`, so its track grew to the board's min-content width;
+  it is now `minmax(0, 1fr)` and shrinks to the screen.
 - Moving a task between Today and the backlog no longer flashes it in the list it
   left. Dropped items are removed from the source list at once instead of lingering
   for a frame or two in a leave transition, and items moved with the button are pinned

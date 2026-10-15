@@ -87,7 +87,7 @@ function toggleTheme() {
         </button>
       </header>
 
-      <main class="grid items-start gap-8 lg:grid-cols-[22rem_1fr]">
+      <main class="grid grid-cols-1 items-start gap-8 lg:grid-cols-[22rem_minmax(0,1fr)]">
         <PomodoroTimer class="lg:sticky lg:top-6" />
         <TodoBoard />
       </main>
