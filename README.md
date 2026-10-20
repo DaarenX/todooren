@@ -8,6 +8,9 @@ A single-page todo app with a built-in Pomodoro timer.
 - **Pomodoro timer:** focus and break sessions (25 and 5 minutes by default, adjustable),
   a countdown ring, and a chime when a session ends.
 - **Light and dark mode**, remembered per browser.
+- **Installable:** on Android, open the site in Chrome and choose **Install app** (or
+  **Add to Home screen**) from the menu. The installed app runs in its own window and
+  works offline.
 
 Everything is stored in the browser's `localStorage`. There is no backend and no account,
 so data stays on one browser profile and is lost if site data is cleared.

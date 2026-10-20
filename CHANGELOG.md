@@ -8,6 +8,9 @@ this project adheres to [Semantic Versioning](https://semver.org).
 
 ### Added
 
+- Installable app (PWA): a web app manifest, app icons, and an offline service worker via
+  `vite-plugin-pwa`, so Android Chrome offers "Install app" and the installed app works
+  offline. Updates apply on the next launch (see ADR 0004).
 - GitHub Pages deployment: `deploy.yml` lints, tests, builds, and publishes `dist/` on
   every push to `main`, and `pr-check.yml` runs the same checks on pull requests (see ADR 0003).
 - Claude Code setup: `CLAUDE.md` and project skills in `.claude/skills/`.
@@ -22,6 +25,8 @@ this project adheres to [Semantic Versioning](https://semver.org).
 
 ### Changed
 
+- The favicon is now the todooren clock logo instead of the Vue logo: `favicon.ico`
+  (16, 32, and 48px) plus `icon.svg` for browsers that support SVG favicons.
 - Finished todos now show their checkbox in the Pomodoro break green instead of the
   rose accent, so completed work reads as "done" rather than "focus".
 - Vite `base` set to `./` so the build loads its assets under the `/todooren/` Pages subpath.
